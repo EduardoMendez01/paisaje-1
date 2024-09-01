@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisaje</title>
+</head>
+<body>
+    <canvas id="paisajeCanvas" width="800" height="600"></canvas>
+
+    <script>
+        var lienzo = document.getElementById("paisajeCanvas");
+        var ctx = lienzo.getContext("2d");
+
+        // CIELO
+        ctx.fillStyle = "#87CEEB";
+        ctx.fillRect(0, 0, 800, 400);
+
+        // TERRENO
+        ctx.fillStyle = "#20974d";
+        ctx.fillRect(0, 400, 800, 200);
+
+        // SOL
+        ctx.beginPath();
+        ctx.arc(700, 100, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FFD700";
+        ctx.fill();
+
+        // MONTAÑAS
+        ctx.beginPath();
+        ctx.moveTo(150, 400);
+        ctx.lineTo(300, 200);
+        ctx.lineTo(450, 400);
+        ctx.closePath();
+        ctx.fillStyle = "#8B4513";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(400, 400);
+        ctx.lineTo(550, 250);
+        ctx.lineTo(700, 400);
+        ctx.closePath();
+        ctx.fillStyle = "#A0522D";
+        ctx.fill();
+
+        // RÍO 
+        ctx.beginPath();
+        ctx.moveTo(400, 400);
+        ctx.quadraticCurveTo(500, 500, 400, 600);
+        ctx.lineTo(450, 600);
+        ctx.quadraticCurveTo(550, 500, 450, 400);
+        ctx.closePath();
+        ctx.fillStyle = "#1E90FF";
+        ctx.fill();
+
+        // REFLEJO SOL
+        ctx.beginPath();
+        ctx.ellipse(200, 500, 30, 10, 0, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255, 215, 0, 0.5)";
+        ctx.fill();
+
+        // ÁRBOLES
+        function arbol(x, y) {
+            ctx.fillStyle = "#8B4513";
+            ctx.fillRect(x, y, 20, 60);
+            ctx.beginPath();
+            ctx.moveTo(x - 30, y);
+            ctx.lineTo(x + 10, y - 60);
+            ctx.lineTo(x + 50, y);
+            ctx.closePath();
+            ctx.fillStyle = "#247744";
+            ctx.fill();
+        }
+        arbol(100, 370);
+        arbol(500, 420);
+        arbol(600, 390);
+
+        // PASTO
+        function pasto() {
+            ctx.fillStyle = "#228B22"; 
+            
+            const pastoPuntos = [
+                { x: 80, y: 470 },
+                { x: 200, y: 460 },
+                { x: 280, y: 460 },
+                { x: 370, y: 460 },
+                { x: 320, y: 480 },
+                { x: 380, y: 480 },
+                { x: 400, y: 480 },
+                { x: 600, y: 460 },
+                { x: 680, y: 460 },
+                { x: 710, y: 460 },
+                { x: 720, y: 460 },
+                { x: 700, y: 485 }
+            ];
+
+            pastoPuntos.forEach(parche => {
+                ctx.beginPath();
+                ctx.moveTo(parche.x, parche.y);
+                ctx.lineTo(parche.x + 5, parche.y - 10);
+                ctx.lineTo(parche.x + 10, parche.y);
+                ctx.closePath();
+                ctx.fill();
+            });
+        }
+
+        pasto();
+
+        // NUBES
+        function nubes(x, y) {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, 2 * Math.PI);
+            ctx.arc(x + 30, y - 10, 25, 0, 2 * Math.PI);
+            ctx.arc(x + 60, y, 20, 0, 2 * Math.PI);
+            ctx.arc(x + 40, y + 20, 25, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        nubes(150, 100);
+        nubes(300, 80);
+        nubes(500, 120);
+
+    </script>
+</body>
+</html>
+
+
+
